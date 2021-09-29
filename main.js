@@ -8,12 +8,18 @@ class Block {
     this.timestamp = timestamp;
     this.data = data;
     this.prevHash = prevHash;
-    this.currentHash = '';
+    this.currentHash = this.calculateHash();
   }
 
   calculateHash() {
     return SHA256(
       this.index + this.prevHash + this.timestamp + JSON.stringify(this.data)
     ).toString();
+  }
+}
+
+class Blockchain {
+  constructor() {
+    this.chain = [];
   }
 }
