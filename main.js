@@ -3,6 +3,7 @@ const SHA256 = require('crypto-js/sha256');
 //9:18
 //the template of every block in our chain that will contain infos of each current block and his previous block
 //calculateHash() ::: calculate and return hash of this block with the constructor property
+//mineBlock() ::: avoid hash changes to keep chain valid (security), and put some difficulty to mine
 class Block {
   constructor(index, timestamp, data, prevHash = '') {
     this.index = index;
@@ -17,9 +18,20 @@ class Block {
       this.index + this.prevHash + this.timestamp + JSON.stringify(this.data)
     ).toString();
   }
+
+  mineBlock(difficulty) {
+    while (
+      this.currentHash.substring(0, difficulty) !==
+      Array(difficulty + 1).join('0')
+    ) {
+      this.currentHash = this.calculateHash();
+    }
+    console.log('Block mined: ' + this.currentHash);
+  }
 }
 
 //this.chain ::: an array that contain genesis block at index 0
+//ischainvalid() bool if there are changes in chain like data (not detect hash changes)
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
