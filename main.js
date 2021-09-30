@@ -47,7 +47,12 @@ class Blockchain {
       if (currentBlock.currentHash !== currentBlock.calculateHash()) {
         return false;
       }
+
+      if (currentBlock.prevHash !== prevBlock.currentHash) {
+        return false;
+      }
     }
+    return true;
   }
 }
 
@@ -55,4 +60,10 @@ let azulAmazCoin = new Blockchain();
 azulAmazCoin.addBlock(new Block(1, '30/09/2021', { amount: 4 }));
 azulAmazCoin.addBlock(new Block(2, '31/09/2021', { amount: 11 }));
 
-console.log(JSON.stringify(azulAmazCoin, null, 4));
+// console.log('this Blockchain is valid? :' + azulAmazCoin.isChainValid());
+
+// azulAmazCoin.chain[1].data = { amount: 15 };
+
+// console.log('this Blockchain is valid? :' + azulAmazCoin.isChainValid());
+
+// console.log(JSON.stringify(azulAmazCoin, null, 4));
