@@ -1,5 +1,9 @@
 const SHA256 = require('crypto-js/sha256');
 
+class Transaction {
+  constructor() {}
+}
+
 //the template of every block in our chain that will contain infos of each current block and his previous block
 //calculateHash() ::: calculate and return hash of this block with the constructor property
 //mineBlock() ::: avoid hash changes to keep chain valid (security), and put some difficulty to mine
@@ -43,7 +47,7 @@ class Blockchain {
   }
 
   createGenesisBlock() {
-    return new Block(0, '29/09/2021', 'Genesis Block', '0');
+    return new Block('29/09/2021', 'Genesis Block', '0');
   }
 
   getLatestBlock() {
