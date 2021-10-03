@@ -1,7 +1,11 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Transaction {
-  constructor() {}
+  constructor(fromAddress, toAddress, amount) {
+    this.fromAddress = fromAddress;
+    this.toAddress = toAddress;
+    this.amount = amount;
+  }
 }
 
 //the template of every block in our chain that will contain infos of each current block and his previous block
@@ -44,6 +48,7 @@ class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 5;
+    this.pendingTransactions = [];
   }
 
   createGenesisBlock() {
