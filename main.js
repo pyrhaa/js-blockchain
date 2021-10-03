@@ -1,14 +1,12 @@
 const SHA256 = require('crypto-js/sha256');
 
-//9:18
 //the template of every block in our chain that will contain infos of each current block and his previous block
 //calculateHash() ::: calculate and return hash of this block with the constructor property
 //mineBlock() ::: avoid hash changes to keep chain valid (security), and put some difficulty to mine
 class Block {
-  constructor(index, timestamp, data, prevHash = '') {
-    this.index = index;
+  constructor(timestamp, transactions, prevHash = '') {
     this.timestamp = timestamp;
-    this.data = data;
+    this.transactions = transactions;
     this.prevHash = prevHash;
     this.currentHash = this.calculateHash();
     this.nonce = 0;
