@@ -70,6 +70,10 @@ class Blockchain {
     ];
   }
 
+  createTransaction(transaction) {
+    this.pendingTransactions.push(transaction);
+  }
+
   isChainValid() {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
