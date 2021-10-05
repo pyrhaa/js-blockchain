@@ -64,6 +64,10 @@ class Blockchain {
     let block = new Block(Date.now(), this.pendingTransactions);
     block.mineBlock(this.difficulty);
     console.log('Block mined with succes!');
+    this.chain.push(block);
+    this.pendingTransactions = [
+      new Transaction(null, miningRewardAddress, this.miningReward),
+    ];
   }
 
   isChainValid() {
