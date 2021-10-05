@@ -6,6 +6,10 @@ class Transaction {
     this.toAddress = toAddress;
     this.amount = amount;
   }
+
+  calculateHash() {
+    return SHA256(this.fromAddress + this.toAddress + this.amount);
+  }
 }
 
 //the template of every block in our chain that will contain infos of each current block and his previous block
