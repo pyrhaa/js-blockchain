@@ -63,7 +63,7 @@ class Blockchain {
   minePendingTransactions(miningRewardAddress) {
     let block = new Block(Date.now(), this.pendingTransactions);
     block.mineBlock(this.difficulty);
-    console.log('Block mined with succes!');
+    console.log('Block mined with success!');
     this.chain.push(block);
     this.pendingTransactions = [
       new Transaction(null, miningRewardAddress, this.miningReward),
@@ -87,6 +87,7 @@ class Blockchain {
         }
       }
     }
+    return balance;
   }
 
   isChainValid() {
@@ -108,7 +109,29 @@ class Blockchain {
 
 let azulAmazCoin = new Blockchain();
 
-console.log('Mining block 1...');
-azulAmazCoin.addBlock(new Block(1, '30/09/2021', { amount: 4 }));
-console.log('Mining block 2...');
-azulAmazCoin.addBlock(new Block(2, '31/09/2021', { amount: 11 }));
+azulAmazCoin.createTransaction(new Transaction('add1', 'add2', 100));
+azulAmazCoin.createTransaction(new Transaction('add2', 'add1', 50));
+console.log('\n Starting mining ...');
+azulAmazCoin.minePendingTransactions('miner-address');
+console.log(
+  '\n Balance of miner-address is',
+  azulAmazCoin.getBalanceOfAddress('miner-address')
+);
+console.log('\n Starting mining again...');
+azulAmazCoin.minePendingTransactions('miner-address');
+console.log(
+  '\n Balance of miner-address is',
+  azulAmazCoin.getBalanceOfAddress('miner-address')
+);
+console.log('\n Starting mining again...');
+azulAmazCoin.minePendingTransactions('miner-address');
+console.log(
+  '\n Balance of miner-address is',
+  azulAmazCoin.getBalanceOfAddress('miner-address')
+);
+
+//------ Previous testings ------
+// console.log('Mining block 1...');
+// azulAmazCoin.addBlock(new Block(1, '30/09/2021', { amount: 4 }));
+// console.log('Mining block 2...');
+// azulAmazCoin.addBlock(new Block(2, '31/09/2021', { amount: 11 }));
