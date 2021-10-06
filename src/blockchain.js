@@ -1,4 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
+const EC = require('elliptic').ec;
+const ec = new EC('secp256k1');
 
 class Transaction {
   constructor(fromAddress, toAddress, amount) {
@@ -64,6 +66,15 @@ class Block {
       this.currentHash = this.calculateHash();
     }
     console.log('Block mined: ' + this.currentHash);
+  }
+
+  hasValidTransaction() {
+    for (const tx of this.transactions) {
+      if (!tx.isValid()) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
