@@ -20,6 +20,14 @@ class Transaction {
     const sig = signKey.sign(hashTx, 'base64');
     this.signature = sig.toDER('hex');
   }
+
+  isValid() {
+    if (this.fromAddress === null) return true;
+
+    if (!this.signature || this.signature.length === 0) {
+      throw new Error('No signature in this transaction');
+    }
+  }
 }
 
 //the template of every block in our chain that will contain infos of each current block and his previous block
