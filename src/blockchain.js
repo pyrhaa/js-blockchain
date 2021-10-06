@@ -27,6 +27,9 @@ class Transaction {
     if (!this.signature || this.signature.length === 0) {
       throw new Error('No signature in this transaction');
     }
+
+    const publicKey = ec.keyFromPublic(this.fromAddress, 'hex');
+    return publicKey.verify(this.calculateHash(), this.signature);
   }
 }
 
