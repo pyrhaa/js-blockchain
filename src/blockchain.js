@@ -68,7 +68,7 @@ class Block {
     console.log('Block mined: ' + this.currentHash);
   }
 
-  hasValidTransaction() {
+  hasValidTransactions() {
     for (const tx of this.transactions) {
       if (!tx.isValid()) {
         return false;
@@ -130,6 +130,10 @@ class Blockchain {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const prevBlock = this.chain[i - 1];
+
+      if (!currentBlock.hasValidTransactions()) {
+        return false;
+      }
 
       if (currentBlock.currentHash !== currentBlock.calculateHash()) {
         return false;
